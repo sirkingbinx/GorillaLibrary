@@ -69,6 +69,10 @@ public static class WebRequestUtility
             {
                 request.SetRequestHeader("Content-Type", model.ContentType);
 
+                string callerName = Assembly.GetCallingAssembly().GetName().Name;
+                string userAgent = $"GorillaLibrary {Plugin.Instance.Info.Metadata.Version} (Caller: {callerName})";
+                request.SetRequestHeader("User-Agent", userAgent)
+
                 if (model.Headers != null)
                 {
                     foreach (var header in model.Headers)
