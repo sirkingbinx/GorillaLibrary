@@ -35,16 +35,24 @@ public class Plugin : BaseUnityPlugin
     {
         Sections = [];
 
-        foreach (var (guid, pluginInfo) in Chainloader.PluginInfos)
+        try 
         {
-            var assembly = pluginInfo?.Instance?.GetType().Assembly;
-            assembly?.GetCustomAttributes().ForEach(attribute =>
+            foreach (var (guid, pluginInfo) in Chainloader.PluginInfos)
             {
-                if (attribute is ModdedWardrobeSectionAttribute category)
+                var assembly = pluginInfo?.Instance?.GetType().Assembly;
+                assembly?.GetCustomAttributes().ForEach(attribute =>
                 {
-                    Sections.Add(category);
-                }
-            });
+                    if (attribute is ModdedWardrobeSectionAttribute category)
+                    {
+                        Sections.Add(category);
+                    }
+                });
+            }
+        } 
+        catch (Exception ex)
+        {
+            Logger.LogFatal("Exception thrown while loading wardrobe sections");
+            Logger.LogError(ex);
         }
 
         sharedObject = new GameObject($"{Info.Metadata.Name} {Info.Metadata.Version}");
