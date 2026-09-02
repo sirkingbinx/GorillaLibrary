@@ -1,6 +1,7 @@
 ﻿using GorillaLibrary.Models;
 using Newtonsoft.Json;
 using System;
+using System.Reflection;
 using System.Text;
 using UnityEngine.Networking;
 
@@ -71,7 +72,7 @@ public static class WebRequestUtility
 
                 string callerName = Assembly.GetCallingAssembly().GetName().Name;
                 string userAgent = $"GorillaLibrary {Plugin.Instance.Info.Metadata.Version} (Caller: {callerName})";
-                request.SetRequestHeader("User-Agent", userAgent)
+                request.SetRequestHeader("User-Agent", userAgent);
 
                 if (model.Headers != null)
                 {

@@ -4,6 +4,7 @@ using BepInEx.Logging;
 using GorillaLibrary.Wardrobe.Attributes;
 using GorillaLibrary.Wardrobe.Behaviours;
 using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
